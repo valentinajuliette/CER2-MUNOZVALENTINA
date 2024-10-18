@@ -1,7 +1,9 @@
-# Proyecto para Certamen 1 del ramo "Taller de Lenguajes de Programación"
+# Proyecto para Certamen 2 del ramo "Taller de Lenguajes de Programación"
 
-**Alumna**: Valentina Juliette Muñoz Rabanal  
-**Carrera**: Ingeniería en Informática (2do año)
+**Alumna**: Valentina Juliette Muñoz Rabanal.
+**Carrera**: Ingeniería en Informática (2do año).
+**Universidad**: Universidad Técnica Federico Santa María (USM).
+**Nota de proyecto**: Por confirmar.
 
 ---
 
