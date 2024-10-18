@@ -1,0 +1,19 @@
+<!-- login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Iniciar Sesión - Tienda Verde{% endblock %}
+
+{% block content %}
+<div id="formContainer" class="container mt-5">
+    <br>
+    <h2 class="text-center">Iniciar Sesión</h2>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" class="form-control" placeholder="Nombre de usuario" required>
+        <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+        <button type="submit" class="btn btn-dark mt-3">Ingresar</button>
+    </form>
+    <br>
+</div>
+{% endblock %}

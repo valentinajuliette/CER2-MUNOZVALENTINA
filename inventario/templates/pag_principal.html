@@ -1,0 +1,72 @@
+<!-- DESCRIPCIÓN DEL PROYECTO PARA CERTAMEN 1:
+"Tienda Verde" es una pequeña empresa local dedicada a la venta de productos ecológicos y sostenibles. En su
+esfuerzo por promover el reciclaje entre sus clientes, la empresa ha decidido implementar una funcionalidad
+adicional en su sitio web: un formulario de solicitud de elementos reciclables. Este formulario permitirá a los usuarios
+solicitar la recolección de residuos específicos desde sus hogares.
+
+ESTRUCTURA DE LA WEB:
+    1.1. Página Principal: Con una breve descripción de la empresa, un menú de navegación y una galería de
+productos destacados.   -->
+
+{% extends 'base.html' %}
+
+{% block title %}Tienda Verde - Página Principal{% endblock %}
+
+{% block content %}
+<!-- Breve descripción de la empresa -->
+<div id="intro" class="container-fluid">
+    <div class="row">
+        <div class="col margen">
+            <h1 class="text-center">Bienvenid@ a Tienda Verde</h1>
+            <br>
+            <!-- Texto inventado jeje -->
+            <p><strong>"Tienda Verde"</strong> es una pequeña empresa local comprometida con el cuidado del 
+                medio ambiente y la 
+                promoción de un estilo de vida más sostenible. Desde su creación, Tienda Verde se ha dedicado 
+                a ofrecer productos ecológicos de alta calidad que ayudan a sus clientes a reducir su impacto 
+                ambiental. La tienda cuenta con una amplia variedad de productos, que van desde artículos de 
+                higiene personal y limpieza del hogar hasta productos reutilizables y materiales reciclados. 
+                <br><br>
+                Además de su enfoque en la sostenibilidad, <strong>Tienda Verde</strong> se esfuerza por educar 
+                a su comunidad sobre la importancia del reciclaje, el consumo 
+                responsable y la reducción de residuos. A través de iniciativas como el programa de recolección  
+                de reciclables y la promoción de productos de bajo impacto, <strong>Tienda Verde</strong> busca 
+                inspirar un cambio positivo en los hábitos de consumo.
+        </div>
+        <!-- Logo -->
+        <div class="col-4 margen">
+            <img src="static/img/logocuadrado2.png" class="img-fluid objectfit1" alt="logo de Tienda Verde en modo cuadrado y colores claros">    
+        </div>
+    </div>
+</div>
+
+<!-- Galería de productos destacados -->
+<!-- Galería de productos -->
+<div id="galeria" class="container-fluid">
+    <!-- Mostrar una lista de productos con imágenes y descripciones breves. -->
+    <div class="row">
+        <div class="col-1"><br></div>
+        {% for producto in productos|slice:":3" %}
+        <!-- El filtro |slice:":3" limita el número de elementos que se pasan al bucle. -->
+            <div class="col-md-3 margen">
+                <div class="card">
+                    <!-- Imagen del producto -->
+                    <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}" style="width:70%">
+                    
+                    <!-- Detalles del producto -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.descripcion }}</p>
+                        <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
+                        <p class="card-text">Stock disponible: {{ producto.stock }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <a class="btn btn-dark col-12" href="catalogo/" role="button">Ver catálogo completo</a>
+    </div>
+</div>
+
+{% endblock %}

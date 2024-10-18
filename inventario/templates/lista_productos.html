@@ -1,0 +1,82 @@
+<!-- ESTRUCTURA DE LA WEB:
+    1.2. Catálogo de Productos: Página que muestre los productos disponibles, con una galería de imágenes basada
+en cards de Bootstrap. -->
+<!-- Archivo HTML para mostrar los productos en un formato amigable. -->
+
+{% extends 'base.html' %}
+
+{% block title %}Tienda Verde - Catálogo de Productos{% endblock %}
+
+{% block content %}
+
+<!-- TÍTULO -->
+<div id="titulo" class="container-fluid">
+    <br>
+    <h1 class="text-center">Catálogo de Productos</h1>
+    <br>
+</div>
+
+<!-- Galería de productos -->
+<div id="galeria" class="container-fluid">
+    <!-- Mostrar una lista de productos con imágenes y descripciones breves. -->
+    <div class="row">
+        <div class="col-1"><br></div>
+        {% for producto in productos %}
+            <div class="col-md-3 margen">
+                <div class="card">
+                    <!-- Imagen del producto -->
+                    <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}" style="width:70%">
+                    
+                    <!-- Detalles del producto -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.nombre }}</h5>
+                        <p class="card-text">{{ producto.descripcion }}</p>
+                        <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
+                        <p class="card-text">Stock disponible: {{ producto.stock }}</p>
+                        <!-- Botón que abre el modal -->
+                        <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#productoModal{{ producto.id }}">
+                            Ver Detalles
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="productoModal{{ producto.id }}" tabindex="-1" aria-labelledby="productoModalLabel{{ producto.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productoModalLabel{{ producto.id }}">{{ producto.nombre }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>{{ producto.descripcion }}</p>
+                            <p><strong>Precio:</strong> ${{ producto.precio }}</p>
+                            <p><strong>Stock disponible:</strong> {{ producto.stock }}</p>
+
+                            {% if user.is_authenticated %}
+                                <p>¿Deseas agregar este producto a tu carrito?</p>
+                                <form method="post" action="{% url 'agregar_al_carrito' producto.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-success">Agregar al Carrito</button>
+                                </form>
+                            {% else %}
+                                <p>Para realizar una compra, por favor <a href="{% url 'login' %}">inicia sesión</a> o <a href="{% url 'registro' %}">regístrate</a>.</p>
+                            {% endif %}
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crear una nueva fila después de cada 3 productos -->
+            {% if forloop.counter|divisibleby:3 %}
+                </div><div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

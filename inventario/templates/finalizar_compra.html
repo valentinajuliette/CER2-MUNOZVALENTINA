@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Finalizar Compra - Tienda Verde{% endblock %}
+{% block content %}
+
+<div id="titulo" class="container-fluid">
+    <br>
+    <h2 class="text-center">Finalizar Compra</h2>
+    <br>
+</div>
+
+<div class="container mt-4">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <!-- Botón que envía el formulario y abre el modal -->
+        <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#productoModal{{ producto.id }}">
+            Confirmar Pedido
+        </button>
+    </form>
+    <br>
+</div>
+
+<!-- MENSAJE DE ÉXITO PARA COMPRA REALIZADA -->
+<!-- Modal de éxito de compra -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Aviso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                {% if exito == 1 %}
+                    <p>¡Pedido registrado con éxito! Recibirás actualizaciones en tu correo.</p>
+                {% elif exito == 0 %}
+                    <p>Hubo un problema al registrar su pedido, por favor intente nuevamente.</p>
+                {% endif %}
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'pag_principal' %}" class="btn btn-dark">Cerrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mostrar el modal si exito está definido -->
+{% if exito is not None %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        });
+    </script>
+{% endif %}
+
+{% endblock %}

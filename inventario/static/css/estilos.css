@@ -1,0 +1,63 @@
+/* ESTE SCRIPT ESTILIZA LA PÁGINA WEB */
+/* RESETEO PARA ELIMINAR BORDES EN BLANCO */
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
+/* CENTRADO DE CONTENIDO */
+.container-fluid {
+    text-align: center;
+}  .derecha {
+    text-align: right;
+} .izquierda {
+    text-align: left;
+} .abajo {
+    vertical-align: text-bottom;
+} .centrado {
+    text-align: center;
+} .margen {
+    margin: 20px;
+}
+
+/* STYLING DE CONTAINERS */
+
+#menu {
+    background-color: #082D0F;
+}
+
+#intro {
+    background-color: #DEE5E5;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+} .objetfit1 > img{
+    /* evita que la imagen sobresalga de los márgenes del container sin redimensionarla */
+    width: 100%;
+    height: 800px;
+    object-fit: none;
+}
+
+#titulo {
+    background-color: #DEE5E5;
+}
+
+#galeria {
+    background-color: #9DC5BB;
+}
+/* esta parte hará que las tarjetas tengan una sombra suave y un efecto de agrandamiento al pasar el
+}cursor sobre ellas */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+} .card:hover {
+    transform: scale(1.05);
+}
+
+#formContainer {
+    background-color: #DEE5E5;
+}
